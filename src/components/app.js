@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/app.scss';
-import logo from '../assets/images/logo.svg';
+import logo from '../assets/images/Rocket-PNG-File.png';
 
 const App = () => (
     <div>
