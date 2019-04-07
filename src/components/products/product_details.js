@@ -25,19 +25,32 @@ class ProductDetails extends Component {
 
     render() {
         const {details} = this.state;
-
+        console.log(details);
         if (details === null) {
             return <h1>Loading...</h1>
         } else if (!details) {
             return <h1 className="center">No Product Found</h1>
         }
-
-        const {description, name} = details;
+        
+        const {description, name, images, price, miscDetails} = details;
+        const miscDetailsArray = Object.entries(miscDetails);
+        const miscDetailsTable = <table></table>;
+        
+        for (var detailsIndex = 0; detailsIndex < miscDetailsArray.length; detailsIndex++) {
+            const tableRow = <tr>
+                                 <td>{miscDetailsArray[detailsIndex][0]}</td>
+                                 <td>{miscDetailsArray[detailsIndex][1]}</td>
+                             </tr>;
+            // $(miscDetailsTable).append(tableRow);
+        }
 
         return (
             <div className="product-details">
                 <h1 className="center">{name}</h1>
+                <img src={`../../dist/${images[0]}`} alt={name}/>
+                <h3 className="center">${(price/100).toFixed(2)}</h3>
                 <p>{description}</p>
+                {miscDetailsTable}
             </div>
         );
     }
