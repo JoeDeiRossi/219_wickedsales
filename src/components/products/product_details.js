@@ -1,6 +1,7 @@
 
 import React, {Component} from 'react';
 import axios from 'axios';
+import ProductCarousel from './product_carousel';
 
 class ProductDetails extends Component {
     state = {
@@ -33,24 +34,25 @@ class ProductDetails extends Component {
         }
         
         const {description, name, images, price, miscDetails} = details;
-        const miscDetailsArray = Object.entries(miscDetails);
-        const miscDetailsTable = <table></table>;
+        // const miscDetailsArray = Object.entries(miscDetails);
+        // const miscDetailsTable = <table></table>;
         
-        for (var detailsIndex = 0; detailsIndex < miscDetailsArray.length; detailsIndex++) {
-            const tableRow = <tr>
-                                 <td>{miscDetailsArray[detailsIndex][0]}</td>
-                                 <td>{miscDetailsArray[detailsIndex][1]}</td>
-                             </tr>;
+        // for (var detailsIndex = 0; detailsIndex < miscDetailsArray.length; detailsIndex++) {
+        //     const tableRow = <tr>
+        //                          <td>{miscDetailsArray[detailsIndex][0]}</td>
+        //                          <td>{miscDetailsArray[detailsIndex][1]}</td>
+        //                      </tr>;
             // $(miscDetailsTable).append(tableRow);
-        }
+        // }
 
         return (
             <div className="product-details">
                 <h1 className="center">{name}</h1>
-                <img src={`../../dist/${images[0]}`} alt={name}/>
-                <h3 className="center">${(price/100).toFixed(2)}</h3>
+                <ProductCarousel images={images}/>
+                {/* <img src={`../../dist/${images[0]}`} alt={name}/> */}
+                {/* <h3 className="center">${(price/100).toFixed(2)}</h3> */}
                 <p>{description}</p>
-                {miscDetailsTable}
+                {/* {miscDetailsTable} */}
             </div>
         );
     }
