@@ -2,6 +2,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import ProductCarousel from './product_carousel';
+import {formatMoney} from '../../helpers';
+import MiscDetails from './misc_details';
 
 class ProductDetails extends Component {
     state = {
@@ -26,33 +28,41 @@ class ProductDetails extends Component {
 
     render() {
         const {details} = this.state;
-        console.log(details);
+
         if (details === null) {
             return <h1>Loading...</h1>
         } else if (!details) {
             return <h1 className="center">No Product Found</h1>
         }
         
-        const {description, name, images, price, miscDetails} = details;
-        // const miscDetailsArray = Object.entries(miscDetails);
-        // const miscDetailsTable = <table></table>;
-        
-        // for (var detailsIndex = 0; detailsIndex < miscDetailsArray.length; detailsIndex++) {
-        //     const tableRow = <tr>
-        //                          <td>{miscDetailsArray[detailsIndex][0]}</td>
-        //                          <td>{miscDetailsArray[detailsIndex][1]}</td>
-        //                      </tr>;
-            // $(miscDetailsTable).append(tableRow);
-        // }
+        const {description, images, miscDetails, name, price} = details;
 
         return (
             <div className="product-details">
                 <h1 className="center">{name}</h1>
-                <ProductCarousel images={images}/>
-                {/* <img src={`../../dist/${images[0]}`} alt={name}/> */}
-                {/* <h3 className="center">${(price/100).toFixed(2)}</h3> */}
-                <p>{description}</p>
-                {/* {miscDetailsTable} */}
+                <div className="row">
+                    <ProductCarousel images={images}/>
+                    <div className="col s12 m4">
+                        <div className="center product-price">{formatMoney(price)}</div>
+                        <div className="center add-to-cart">
+                            <span className="qty-container">
+                                <button className="btn btn-small btn-floating green">
+                                    <i className="material-icons">remove_circle_outline</i>
+                                </button>
+                                <span className="product-qty">1</span>
+                                <button className="btn btn-small btn-floating green">
+                                    <i className="material-icons">add_circle_outline</i>
+                                </button>
+                            </span>
+                            
+                            <button className="btn">
+                                <i className="material-icons">add_shopping_cart</i>
+                            </button>
+                        </div>
+                        <p>{description}</p>
+                        <MiscDetails details={miscDetails}/>
+                    </div>
+                </div>
             </div>
         );
     }

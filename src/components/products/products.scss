@@ -9,10 +9,29 @@
     }
 
     .product-details {
-        img {
-            display: block;
-            margin: auto;
-            height: 200px;
+        .product-price {
+            font-size: 3.5em;
+            font-weight: bold;
+        }
+
+        .carousel {
+            .indicators {
+                background-color: #eee;
+            }
+        }
+
+        .add-to-cart {
+            font-size: 2em;
+            
+            .qty-container {
+                margin-right: 30px;
+
+                .product-qty {
+                    padding: 0 10px;
+                    position: relative;
+                    top: 4px;
+                }
+            }
         }
     }
 }
