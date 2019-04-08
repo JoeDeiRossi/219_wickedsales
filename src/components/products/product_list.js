@@ -10,10 +10,16 @@ class ProductList extends Component {
         this.state = {
             products: []
         }
+
+        this.goToDetails = this.goToDetails.bind(this);
     }
 
     componentDidMount() {
         this.getProducts();
+    }
+
+    goToDetails(id) {
+        this.props.history.push(`/products/${id}`);
     }
 
     getProducts() {
@@ -25,10 +31,10 @@ class ProductList extends Component {
     }
 
     render() {
-        console.log('State:', this.state);
+        // console.log('State:', this.state);
 
         const productList = this.state.products.map((product) => {
-            return <ProductItem key={product.id} {...product}/>
+            return <ProductItem key={product.id} {...product} goToDetails={this.goToDetails}/>
         });
 
         return (
