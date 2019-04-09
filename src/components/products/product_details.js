@@ -24,6 +24,7 @@ class ProductDetails extends Component {
                 details: false
             });
         }
+        //call server to get product details
     }
 
     render() {
