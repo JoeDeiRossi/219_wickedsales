@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 class ProductDetails extends Component {
     componentDidMount() {
         const {params} = this.props.match;
-        console.log('Fetch product with id of:', params.product_id);
         //call server to get product details
     }
 
