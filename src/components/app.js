@@ -1,9 +1,10 @@
 
 import React from 'react';
 import ProductRoutes from './products/index';
-import {Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Home from './home';
 import Nav from './nav';
+import NotFound from './404';
 import 'materialize-css/dist/js/materialize.min';
 //Import materialize's css (or any external css) before your own css!
 import 'materialize-css/dist/css/materialize.min.css';
@@ -14,8 +15,11 @@ const App = () => (
         <Nav/>
 
         <div className="container">
-            <Route path="/" component={Home} exact/>
-            <Route path="/products" component={ProductRoutes}/>
+            <Switch>
+                <Route path="/" component={Home} exact/>
+                <Route path="/products" component={ProductRoutes}/>
+                <Route component={NotFound}/>
+            </Switch>
         </div>
     </div>
 );
