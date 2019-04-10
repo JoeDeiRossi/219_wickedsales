@@ -13,6 +13,7 @@
         throw new Exception('Missing cart id');
     }
 
+    $user_id = 1;
     $cart_id = $_SESSION['cart_id'];
 
     //my query:
@@ -26,7 +27,7 @@
                         FROM `carts` AS c
                         JOIN `cart_items` AS ci ON ci.`carts_id` = c.`id`
                         JOIN `products` AS p ON ci.`products_id` = p.`id`
-                        WHERE c.`id` = $cart_id";
+                        WHERE c.`id` = $cart_id AND c.`users_id` = $user_id";
 
     $cartData = mysqli_query($conn, $cartQuery);
 
