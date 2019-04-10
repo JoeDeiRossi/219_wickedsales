@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import ProductCarousel from './product_carousel';
+import ProductAdd from './product_add';
 import {formatMoney} from '../../helpers';
 import MiscDetails from './misc_details';
 
@@ -29,6 +30,7 @@ class ProductDetails extends Component {
 
     render() {
         const {details} = this.state;
+        const {params} = this.props.match;
 
         if (details === null) {
             return <h1>Loading...</h1>
@@ -45,21 +47,7 @@ class ProductDetails extends Component {
                     <ProductCarousel images={images}/>
                     <div className="col s12 m4">
                         <div className="center product-price">{formatMoney(price)}</div>
-                        <div className="center add-to-cart">
-                            <span className="qty-container">
-                                <button className="btn btn-small btn-floating green">
-                                    <i className="material-icons">remove_circle_outline</i>
-                                </button>
-                                <span className="product-qty">1</span>
-                                <button className="btn btn-small btn-floating green">
-                                    <i className="material-icons">add_circle_outline</i>
-                                </button>
-                            </span>
-                            
-                            <button className="btn">
-                                <i className="material-icons">add_shopping_cart</i>
-                            </button>
-                        </div>
+                        <ProductAdd productId={params.product_id}/>
                         <p>{description}</p>
                         <MiscDetails details={miscDetails}/>
                     </div>
