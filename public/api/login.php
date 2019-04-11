@@ -22,6 +22,7 @@
     }
     
     $email = $input['email'];
+    $email = addslashes($email);
     $password = $input['password'];
     $hashedPassword = sha1($password);
 
