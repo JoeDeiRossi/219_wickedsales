@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, {Component} from 'react';
 import ProductRoutes from './products/index';
 import {Route, Switch} from 'react-router-dom';
+import axios from 'axios';
 import Home from './home';
 import Nav from './nav';
 import NotFound from './404';
@@ -11,19 +12,49 @@ import 'materialize-css/dist/js/materialize.min';
 import 'materialize-css/dist/css/materialize.min.css';
 import '../assets/css/app.scss';
 
-const App = () => (
-    <div>
-        <Nav/>
+class App extends Component {
+    constructor(props) {
+        super(props);
 
-        <div className="container">
-            <Switch>
-                <Route path="/" component={Home} exact/>
-                <Route path="/products" component={ProductRoutes}/>
-                <Route path="/cart" component={Cart}/>
-                <Route component={NotFound}/>
-            </Switch>
-        </div>
-    </div>
-);
+        this.state = {
+            cartItems: 0
+        }
+
+        this.updateCartItems = this.updateCartItems.bind(this);
+    }
+
+    componentDidMount() {
+        this.getCartItemsCount();
+    }
+
+    async getCartItemsCount() {
+        const response = await axios.get('/api/getcartitemcount.php');
+        this.updateCartItems(response.data.itemCount);
+    }
+
+    updateCartItems(count) {
+        this.setState({
+            cartItems: count
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <Nav cartItems={this.state.cartItems}/>
+                <div className="container">
+                    <Switch>
+                        <Route path="/" component={Home} exact/>
+                        <Route path="/products" render={(routingProps) => {
+                            return <ProductRoutes {...routingProps} updateCart={this.updateCartItems}/>
+                        }}/>
+                        <Route path="/cart" component={Cart}/>
+                        <Route component={NotFound}/>
+                    </Switch>
+                </div>
+            </div>
+        );
+    }
+}
 
 export default App;
