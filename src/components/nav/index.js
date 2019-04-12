@@ -9,13 +9,13 @@ class Nav extends Component {
     renderLinks() {
         return (
             <Fragment>
-                <li>
+                <li className="sidenav-close">
                     <Link to="/">Home</Link>
                 </li>
-                <li>
+                <li className="sidenav-close">
                     <Link to="/products">Products</Link>
                 </li>
-                <li>
+                <li className="sidenav-close">
                     <CartLink items={this.props.cartItems}/>
                 </li>
             </Fragment>
