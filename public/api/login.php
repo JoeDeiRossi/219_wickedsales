@@ -22,17 +22,30 @@
     }
     
     $email = $input['email'];
-    $email = addslashes($email);
+    // $email = addslashes($email);
     $password = $input['password'];
     $hashedPassword = sha1($password);
 
     unset($input['password']);
     
     $query = "SELECT `id`, `name` FROM `users`
-        WHERE `email` = '$email'
-        AND `password` = '$hashedPassword'";
+        WHERE `email` = ?
+        AND `password` = ?";
 
-    $result = mysqli_query($conn, $query);
+    //1. send the safe query to the db
+    $statement = mysqli_prepare($conn, $query);
+
+    //2. send the dangerous data to the db
+    mysqli_stmt_bind_param($statement, 'ss', $email, $hashedPassword);
+
+    //3. tell the db to mix the query and the data
+    mysqli_stmt_execute($statement);
+
+    //4. get the result pointer for the prepared query statement's data
+    $result = mysqli_stmt_get_result($statement);
+
+    //not needed anymore because of prepared statement above
+    // $result = mysqli_query($conn, $query);
 
     if (!$result) {
         throw new Exception(mysqli_error($conn));
