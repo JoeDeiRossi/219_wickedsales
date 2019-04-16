@@ -7,9 +7,13 @@ class SignIn extends Component {
         return (
             <div>
                 <h1 className="center">Sign In</h1>
-                <SignInForm/>
+                <SignInForm signIn={this.handleSignIn}/>
             </div>
         );
+    }
+
+    handleSignIn(values) {
+        console.log('Form values:', values);
     }
 }
 
