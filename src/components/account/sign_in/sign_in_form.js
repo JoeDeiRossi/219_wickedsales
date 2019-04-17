@@ -4,8 +4,6 @@ import {reduxForm, Field} from 'redux-form';
 import Input from '../../general/input';
 
 const SignInForm = props => {
-    console.log('SignInForm props', props);
-
     const {handleSubmit, signIn} = props;
 
     return (
@@ -19,13 +17,28 @@ const SignInForm = props => {
 
             <div className="row">
                 <div className="col s12 right-align">
-                    <button className="btn brown lighten-2">Sign In</button>
+                    <button className="btn green">Sign In</button>
                 </div>
             </div>
         </form>
     );
 }
 
+function validate({email, password}) {
+    const errors = {};
+
+    if (!email) {
+        errors.email = 'Please enter your email';
+    }
+
+    if (!password) {
+        errors.password = 'Please enter your password';
+    }
+
+    return errors;
+}
+
 export default reduxForm({
-    form: 'sign-in-form'
+    form: 'sign-in-form',
+    validate: validate
 })(SignInForm);
