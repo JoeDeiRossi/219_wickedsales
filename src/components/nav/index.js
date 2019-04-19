@@ -72,8 +72,6 @@ class Nav extends Component {
     render() {
         const links = this.renderLinks();
 
-        console.log('Props:', this.props);
-
         return (
             <Fragment>
                 <nav className="green">

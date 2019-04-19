@@ -15,8 +15,6 @@ class SignIn extends Component {
     }
 
     handleSignIn = values => {
-        console.log('Form values:', values);
-
         this.props.signIn(values);
     }
 }
